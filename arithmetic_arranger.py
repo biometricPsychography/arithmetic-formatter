@@ -8,6 +8,7 @@ def arithmetic_arranger(problems, will_calc_answers):
         if len(problems) > 5 :
             raise Exception('Too many problems.')
 
+        formatted_problem_list = []
         for problem in problems :
             if problem.find('*') != -1 or problem.find('/') != -1:
                 raise Exception("Operator must be '+' or '-'.")
@@ -84,15 +85,77 @@ def arithmetic_arranger(problems, will_calc_answers):
                 underline += '-'
 
 
-            return f'{first_operand_padding_string + operands[0]}\n{operator}{operator_padding_string + operands[1]}\n{underline}'
+            
 
             
 
+            answer = ''
+            answer_padding_count = 0
+            answer_padding = ''
+            answer_line_break = ''
+            if will_calc_answers :
+                if operator == "+" :
+                    answer = int(operands[0]) + int(operands[1])
+                elif operator == "-" :
+                    answer = int(operands[0]) - int(operands[1])
+            
+                answer = str(answer)
+
+
+                answer_padding_count = len(underline) - len(answer)
+                for number in range(answer_padding_count) :
+                    answer_padding += ' '
+                
+                answer = str(answer)
+                answer_line_break = '\n'
+
+
+            formatted_problem_list.append(f'{first_operand_padding_string + operands[0]}\n{operator}{operator_padding_string + operands[1]}\n{underline}{answer_line_break + answer_padding + answer}')
+
+
+        
+        final_text_line_list = []
+        # generate a 2D list where each 1st level list reps problem and inside is list of lines
+        problem_spacing = '    '
+        split_problems_list = []
+        problem_index = 0
+        for formatted_problem in formatted_problem_list :
+            split_problems_list.append([])
+            current_problem_textlines_list = formatted_problem.split('\n')
+            for current_problem_textline in current_problem_textlines_list :
+                if problem_index == 0 :
+                    problem_spacing = ''
+                else :
+                    problem_spacing = '    '
+                split_problems_list[problem_index].append(problem_spacing + current_problem_textline)
+            
+            problem_index += 1
+        
+        # collapse 2D list where each element represents a complete line of the final output
+        for problem in split_problems_list :
+          
+            line_index = 0
+            for line in problem :
+                if len(final_text_line_list) < len(problem) :
+                    final_text_line_list.append('')
+                
+                final_text_line_list[line_index] += line
+                line_index += 1
+
+        # turn list into one string
+
+        arranged_problems = ''
+        for line in final_text_line_list :
+            arranged_problems += line + '\n'
+                
+
+
+        return (arranged_problems)
+
     except Exception as e:
         return 'Error: ' + str(e)
+        
 
-    arranged_problems = None
+    
 
-    return arranged_problems
-
-print(arithmetic_arranger(['100 + 500']))
+print(arithmetic_arranger(['100 - 5000', '22 + 66'], False))
