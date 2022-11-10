@@ -1,4 +1,4 @@
-def arithmetic_arranger(problems, will_calc_answers):
+def arithmetic_arranger(problems, will_calc_answers=False):
     try:
         # Check for invalid input
 
@@ -15,7 +15,6 @@ def arithmetic_arranger(problems, will_calc_answers):
             
             operands = None
             parsed_operands_list = []
-            print(problem)
             
             # if '+' or '-' is present
 
@@ -158,4 +157,4 @@ def arithmetic_arranger(problems, will_calc_answers):
 
     
 
-print(arithmetic_arranger(['100 - 5000', '22 + 66'], False))
+print(arithmetic_arranger(['100 - 5000', '22 + 66'], True))
