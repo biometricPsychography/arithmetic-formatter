@@ -156,5 +156,3 @@ def arithmetic_arranger(problems, will_calc_answers=False):
         
 
     
-
-print(arithmetic_arranger(['100 - 5000', '22 + 66'], True))
