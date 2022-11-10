@@ -144,11 +144,14 @@ def arithmetic_arranger(problems, will_calc_answers=False):
         # turn list into one string
 
         arranged_problems = ''
-        for line in final_text_line_list :
-            arranged_problems += line + '\n'
-                
+        
+        for index, line in enumerate(final_text_line_list) :
+            if index != len(final_text_line_list) - 1 :
+                arranged_problems += line + '\n'
+            else :
+                arranged_problems += line
 
-
+        # DEBUG: print('REPRESENTATION', repr(arranged_problems))
         return (arranged_problems)
 
     except Exception as e:
