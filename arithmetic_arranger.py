@@ -41,7 +41,7 @@ def arithmetic_arranger(problems, will_calc_answers=False):
                     # remove padding and verify it's an int then, return to stringe
                     parsed_operands_list.append(str(int(operand)))
                 except Exception as e:
-                    return 'Numbers must only contain digits.'
+                    raise Exception('Numbers must only contain digits.')
             
             operands = parsed_operands_list
 
@@ -156,6 +156,8 @@ def arithmetic_arranger(problems, will_calc_answers=False):
 
     except Exception as e:
         return 'Error: ' + str(e)
+
+print(arithmetic_arranger(['98 + 3g5', '3801 - 2', '45 + 43', '123 + 49'], True))
         
 
     
