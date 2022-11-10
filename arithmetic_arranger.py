@@ -157,7 +157,6 @@ def arithmetic_arranger(problems, will_calc_answers=False):
     except Exception as e:
         return 'Error: ' + str(e)
 
-print(arithmetic_arranger(['98 + 3g5', '3801 - 2', '45 + 43', '123 + 49'], True))
         
 
     
